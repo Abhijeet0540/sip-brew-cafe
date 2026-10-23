@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 1024" width="2048" height="1024">
+  <defs>
+    <!-- Warm Cream/Kraft Paper Background -->
+    <linearGradient id="kraftPaper" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EFE3D3" />
+      <stop offset="40%" stop-color="#EADCCB" />
+      <stop offset="70%" stop-color="#E5D6C4" />
+      <stop offset="100%" stop-color="#DFCFBB" />
+    </linearGradient>
+
+    <!-- Botanical Leaf Cluster 1 -->
+    <g id="leafCluster">
+      <path d="M 0,0 C 40,-30 90,-40 150,-35 C 210,-30 260,-5 300,30" 
+            fill="none" stroke="#2B1D18" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 60,-22 C 55,-70 100,-95 130,-80 C 140,-50 100,-30 60,-22 Z" 
+            fill="none" stroke="#2B1D18" stroke-width="2.8"/>
+      <path d="M 60,-22 C 90,-50 115,-70 130,-80" fill="none" stroke="#2B1D18" stroke-width="1.6"/>
+      <path d="M 80,-38 C 95,-55 90,-60 85,-65" fill="none" stroke="#2B1D18" stroke-width="1.2"/>
+      <path d="M 100,-48 C 115,-58 120,-60 120,-68" fill="none" stroke="#2B1D18" stroke-width="1.2"/>
+
+      <path d="M 150,-35 C 170,-80 220,-85 240,-65 C 230,-35 190,-30 150,-35 Z" 
+            fill="none" stroke="#2B1D18" stroke-width="2.8"/>
+      <path d="M 150,-35 C 190,-55 220,-68 240,-65" fill="none" stroke="#2B1D18" stroke-width="1.6"/>
+      <path d="M 175,-46 C 190,-60 195,-65 190,-70" fill="none" stroke="#2B1D18" stroke-width="1.2"/>
+      <path d="M 200,-52 C 215,-60 220,-62 225,-66" fill="none" stroke="#2B1D18" stroke-width="1.2"/>
+
+      <path d="M 110,-32 C 130,10 175,20 185,0 C 170,-15 140,-25 110,-32 Z" 
+            fill="none" stroke="#2B1D18" stroke-width="2.8"/>
+      <path d="M 110,-32 C 145,-10 170,5 185,0" fill="none" stroke="#2B1D18" stroke-width="1.6"/>
+      
+      <path d="M 240,-15 C 280,-20 320,-5 330,15 C 300,25 270,10 240,-15 Z" 
+            fill="none" stroke="#2B1D18" stroke-width="2.8"/>
+    </g>
+
+    <g id="leafPair">
+      <path d="M 0,0 C -30,-45 -10,-75 20,-65 C 30,-40 15,-15 0,0 Z" 
+            fill="none" stroke="#2B1D18" stroke-width="2.5"/>
+      <path d="M 0,0 C 5,-35 15,-55 20,-65" fill="none" stroke="#2B1D18" stroke-width="1.5"/>
+      <path d="M 0,0 C 35,-40 65,-30 65,0 C 45,10 20,5 0,0 Z" 
+            fill="none" stroke="#2B1D18" stroke-width="2.5"/>
+      <path d="M 0,0 C 30,-20 50,-15 65,0" fill="none" stroke="#2B1D18" stroke-width="1.5"/>
+    </g>
+
+    <g id="singleLeaf">
+      <path d="M 0,0 C 25,-40 70,-50 90,-30 C 85,0 45,15 0,0 Z" 
+            fill="none" stroke="#2B1D18" stroke-width="2.8"/>
+      <path d="M 0,0 C 40,-22 70,-28 90,-30" fill="none" stroke="#2B1D18" stroke-width="1.5"/>
+      <path d="M 25,-14 C 35,-26 50,-28 55,-35" fill="none" stroke="#2B1D18" stroke-width="1.2"/>
+      <path d="M 50,-21 C 60,-30 70,-32 75,-37" fill="none" stroke="#2B1D18" stroke-width="1.2"/>
+    </g>
+  </defs>
+
+  <rect width="2048" height="1024" fill="url(#kraftPaper)" />
+
+  <!-- FRONT PANEL (Centered at x = 512 for Three.js Cylinder 0 deg) -->
+  <g transform="translate(420, 150) rotate(-20) scale(0.9)">
+    <use href="#leafCluster" />
+  </g>
+  <g transform="translate(680, 130) rotate(35) scale(-0.85, 0.85)">
+    <use href="#leafCluster" />
+  </g>
+  <g transform="translate(320, 260) rotate(-45) scale(0.8)">
+    <use href="#leafPair" />
+  </g>
+  <g transform="translate(760, 290) rotate(60) scale(0.8)">
+    <use href="#singleLeaf" />
+  </g>
+
+  <g transform="translate(330, 830) rotate(15) scale(0.95)">
+    <use href="#leafCluster" />
+  </g>
+  <g transform="translate(720, 860) rotate(-25) scale(-0.9, 0.9)">
+    <use href="#leafCluster" />
+  </g>
+  <g transform="translate(260, 720) rotate(-15) scale(0.8)">
+    <use href="#singleLeaf" />
+  </g>
+  <g transform="translate(780, 710) rotate(20) scale(-0.8, 0.8)">
+    <use href="#leafPair" />
+  </g>
+
+  <!-- BRAND LOGO GROUP -->
+  <g transform="translate(512, 490)">
+    <!-- "Sip" -->
+    <path d="M -175,-145 C -160,-175 -130,-195 -95,-190 C -60,-185 -45,-155 -55,-130 C -65,-105 -110,-90 -145,-75 C -175,-62 -190,-40 -185,-15 C -178,18 -140,42 -95,38 C -60,35 -30,15 -15,-5 L -5,12 C -25,30 -60,54 -105,55 C -160,56 -210,25 -215,-20 C -218,-55 -195,-85 -165,-102 C -130,-122 -95,-135 -85,-155 C -78,-170 -92,-180 -110,-178 C -132,-175 -152,-160 -165,-140 Z" fill="#2B1D18" />
+    <path d="M -50,-100 C -35,-98 -25,-85 -25,-68 L -25,25 C -25,38 -15,48 0,48 L 5,48 L 5,60 C -15,62 -42,55 -48,32 L -48,-78 C -48,-92 -52,-95 -60,-98 Z" fill="#2B1D18"/>
+    <circle cx="-35" cy="-135" r="14" fill="#2B1D18"/>
+
+    <path d="M 5,-98 C 22,-98 32,-85 32,-65 L 32,-45 C 50,-75 80,-98 120,-95 C 165,-92 195,-60 195,-10 C 195,45 155,75 110,75 C 75,75 45,55 30,30 L 30,105 C 30,120 18,135 0,135 C -15,135 -25,120 -25,105 L -25,-65 C -25,-85 -10,-98 5,-98 Z M 110,-60 C 75,-60 35,-30 35,0 C 35,32 70,50 108,50 C 145,50 168,25 168,-8 C 168,-40 145,-60 110,-60 Z" fill="#2B1D18"/>
+
+    <!-- Steaming Coffee Cup Icon -->
+    <g transform="translate(195, -165) scale(0.95)">
+      <path d="M 12,-48 C 22,-36 10,-24 20,-12 C 28,-2 18,10 26,20" fill="none" stroke="#2B1D18" stroke-width="6" stroke-linecap="round"/>
+      <path d="M 32,-40 C 40,-30 30,-20 38,-10 C 44,-2 36,8 42,16" fill="none" stroke="#2B1D18" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M 0,22 L 48,22 C 45,48 38,62 24,62 C 10,62 3,48 0,22 Z" fill="#2B1D18"/>
+      <path d="M 45,28 C 58,28 60,45 44,50" fill="none" stroke="#2B1D18" stroke-width="5" stroke-linecap="round"/>
+    </g>
+
+    <!-- "&" -->
+    <path d="M 50,45 C 65,30 85,25 98,35 C 112,46 105,65 90,75 C 75,85 55,80 45,68 L 22,88 C 40,110 75,120 105,105 C 130,92 140,65 130,38 C 120,15 95,2 75,-8 C 95,-22 105,-42 95,-62 C 82,-85 50,-92 28,-78 C 8,-65 -2,-42 5,-20 C 10,-2 25,12 45,28 L 50,45 Z M 45,-25 C 38,-38 42,-58 55,-65 C 68,-72 82,-62 82,-48 C 82,-32 65,-20 45,-25 Z" fill="#2B1D18" transform="translate(0, 10) scale(0.85)"/>
+
+    <!-- "Brew" -->
+    <g transform="translate(-140, 145)">
+      <path d="M -70,-85 C -45,-85 -25,-75 -15,-60 C -5,-45 -8,-25 -25,-12 C -2,0 8,22 2,45 C -5,72 -32,85 -65,85 L -105,85 C -118,85 -125,75 -125,60 L -125,-60 C -125,-78 -115,-85 -95,-85 Z M -70,-55 L -95,-55 L -95,-22 L -70,-22 C -55,-22 -45,-30 -45,-40 C -45,-50 -55,-55 -70,-55 Z M -65,55 C -50,55 -38,48 -38,32 C -38,18 -50,12 -65,12 L -95,12 L -95,55 Z" fill="#2B1D18"/>
+      <path d="M 5,-25 C 20,-25 32,-15 32,5 L 32,75 C 32,85 22,95 8,95 C -5,95 -15,85 -15,75 L -15,-5 C -15,-20 -5,-25 5,-25 Z M 32,15 C 45,-15 75,-30 105,-22 L 95,10 C 72,5 50,15 35,35 Z" fill="#2B1D18"/>
+      <path d="M 160,-28 C 205,-28 238,2 238,45 C 238,55 230,62 218,62 L 138,62 C 142,85 162,95 188,95 C 208,95 225,85 235,75 L 245,95 C 230,110 205,122 178,122 C 128,122 105,85 105,45 C 105,2 128,-28 160,-28 Z M 140,35 L 205,35 C 202,15 188,-2 165,-2 C 148,-2 142,15 140,35 Z" fill="#2B1D18"/>
+      <path d="M 270,-22 C 285,-22 295,-12 295,5 L 305,65 L 340,-12 C 348,-22 360,-25 370,-22 C 382,-18 388,-5 385,8 L 350,88 C 342,105 328,112 315,108 C 302,102 295,90 290,75 L 278,20 L 265,75 C 260,90 250,102 238,105 C 225,108 215,98 210,82 L 195,5 C 192,-8 200,-20 215,-22 C 228,-22 238,-12 240,5 L 252,65 Z" fill="#2B1D18" transform="translate(20, -5)"/>
+    </g>
+
+    <!-- Tagline: COFFEE • CONVERSATION • COMFORT -->
+    <text x="0" y="320" 
+          text-anchor="middle" 
+          font-family="'Manrope', -apple-system, sans-serif" 
+          font-size="28" 
+          font-weight="700" 
+          letter-spacing="9"
+          fill="#2B1D18">
+      COFFEE &#8226; CONVERSATION &#8226; COMFORT
+    </text>
+  </g>
+
+  <!-- BACK & SIDE PANELS: Botanical Line Art -->
+  <g transform="translate(1250, 320) scale(1.4) rotate(-10)">
+    <use href="#leafCluster" />
+  </g>
+  <g transform="translate(1650, 240) scale(-1.3, 1.3) rotate(25)">
+    <use href="#leafCluster" />
+  </g>
+  <g transform="translate(1420, 680) scale(1.3) rotate(15)">
+    <use href="#leafCluster" />
+  </g>
+  <g transform="translate(1820, 620) scale(-1.4, 1.4) rotate(-15)">
+    <use href="#leafCluster" />
+  </g>
+  <g transform="translate(1120, 480) scale(1.2) rotate(45)">
+    <use href="#leafPair" />
+  </g>
+  <g transform="translate(1550, 480) scale(1.5) rotate(-35)">
+    <use href="#singleLeaf" />
+  </g>
+  <g transform="translate(1980, 420) scale(1.3) rotate(30)">
+    <use href="#leafPair" />
+  </g>
+  <g transform="translate(1200, 850) scale(1.1) rotate(5)">
+    <use href="#leafCluster" />
+  </g>
+  <g transform="translate(1600, 880) scale(-1.2, 1.2) rotate(-10)">
+    <use href="#leafCluster" />
+  </g>
+  <g transform="translate(1380, 140) scale(1.2) rotate(-25)">
+    <use href="#leafCluster" />
+  </g>
+  <g transform="translate(1800, 130) scale(1.1) rotate(20)">
+    <use href="#leafPair" />
+  </g>
+</svg>

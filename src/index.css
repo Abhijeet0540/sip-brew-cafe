@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-cream: #F4EFE5;
+    --warm-ivory: #FAF7F0;
+    --espresso: #251811;
+    --coffee-brown: #68442F;
+    --caramel: #B88A5A;
+    --muted-text: #80776C;
+    --white: #FFFFFF;
+  }
+
+  html {
+    background-color: var(--bg-cream);
+    color: var(--espresso);
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg-cream);
+    color: var(--espresso);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgba(184, 138, 90, 0.25);
+    color: #251811;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #FAF7F0;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #DFCAAC;
+    border-radius: 9999px;
+    border: 2px solid #FAF7F0;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #B88A5A;
+  }
+}
+
+@layer utilities {
+  .font-editorial {
+    font-family: 'Instrument Serif', Georgia, serif;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grain-overlay {
+    background-image: radial-gradient(rgba(37, 24, 17, 0.04) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  .botanical-pattern {
+    background-color: #FAF7F0;
+    background-image: radial-gradient(#68442F 0.5px, transparent 0.5px), radial-gradient(#68442F 0.5px, #FAF7F0 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+  }
+
+  .d-none,
+  .d-non {
+    display: none !important;
+  }
+
+  /* Completely hide scrollbars while allowing touch/mouse drag scrolling */
+  .scrollbar-none::-webkit-scrollbar,
+  .no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+  }
+
+  .scrollbar-none,
+  .no-scrollbar {
+    -ms-overflow-style: none !important; /* IE and Edge */
+    scrollbar-width: none !important; /* Firefox */
+  }
+
+  /* Organic 3D floating keyframes for background coffee beans */
+  .animate-float-slow {
+    animation: float-slow 7.5s ease-in-out infinite;
+  }
+
+  .animate-float-reverse {
+    animation: float-reverse 9s ease-in-out infinite;
+  }
+
+  .animate-drift-slow {
+    animation: drift-slow 11s ease-in-out infinite;
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(3deg);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(14px) rotate(-3.5deg);
+  }
+}
+
+@keyframes drift-slow {
+  0%, 100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  50% {
+    transform: translate(8px, -12px) rotate(2deg);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
