@@ -331,7 +331,14 @@ export const Footer: React.FC = () => {
                 CONTACT US
               </h4>
               <div className="space-y-2 text-sm font-sans text-[#FAF7F0]/80">
-                <p className="tracking-wide">{SITE_CONFIG.contact.phone}</p>
+                <p className="tracking-wide">
+                  <a
+                    href={`tel:${SITE_CONFIG.contact.phone.replace(/\s+/g, "")}`}
+                    className="hover:text-caramel-300 transition-colors"
+                  >
+                    {SITE_CONFIG.contact.phone}
+                  </a>
+                </p>
                 <p>
                   <a
                     href={`mailto:${SITE_CONFIG.contact.email}`}

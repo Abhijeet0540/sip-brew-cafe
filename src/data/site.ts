@@ -82,9 +82,9 @@ export const SITE_CONFIG: SiteConfig = {
     ],
   },
   contact: {
-    phone: "+91 98765 43210",
-    displayPhone: "+91 98765 43210",
-    whatsappNumber: "919876543210",
+    phone: "+91 79 7207 0329",
+    displayPhone: "+91 79 7207 0329",
+    whatsappNumber: "917972070329",
     whatsappMessage: "Hi Sip & Brew! I would love to order / inquire about your menu.",
     instagramHandle: "@sipandbrewcafee",
     instagramUrl: "https://www.instagram.com/sipandbrewcafee?rpxt=ZDNlZDc0MzIxNw==",
