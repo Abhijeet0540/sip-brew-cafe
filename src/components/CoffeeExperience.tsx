@@ -23,7 +23,7 @@ const ATMOSPHERE_SLIDES: AtmosphereSlide[] = [
     subtitle: "Brand Identity · Botanical Line Art",
     caption:
       "Crafted in warm cream paper with our distinctive hand-drawn botanical leaves and Sip & Brew emblem. Tactile, insulated, and designed for coffee in hand.",
-    image: "/images/cup-reference.jpg",
+    image: "/images/sip-brew-signature-cup-steaming.jpg",
     tag: "Original Takeaway Cup",
   },
   {
