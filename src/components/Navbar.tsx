@@ -65,31 +65,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
             <a
               href="#hero"
               onClick={(e) => handleLinkClick(e, "#hero")}
-              className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-caramel-500 rounded-lg p-1"
+              aria-label="Sip & Brew"
+              className="flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-caramel-500 rounded-lg py-1 transition-transform"
             >
-              {/* Brand Emblem & Wordmark */}
-              <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+              {/* Brand Emblem Logo Only */}
+              <div className="relative h-11 sm:h-12 w-auto flex-shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
                 <img
                   src="/images/Glossy Sip & Brew Café Emblem.png"
-                  alt="Sip & Brew Emblem"
-                  className="w-full h-full object-contain filter drop-shadow-md"
+                  alt="Sip & Brew Logo"
+                  className="h-11 sm:h-12 w-auto object-contain filter drop-shadow-md"
                 />
-              </div>
-              <div className="flex flex-col">
-                <span
-                  className={`font-lobster text-2xl sm:text-3xl font-normal tracking-wide leading-none transition-colors duration-300 ${
-                    isScrolled ? "text-[#251811]" : "text-[#FAF7F0] drop-shadow-sm"
-                  }`}
-                >
-                  Sip &amp; Brew
-                </span>
-                <span
-                  className={`hidden md:inline-block text-[11px] font-sans font-medium uppercase tracking-[0.2em] mt-1 transition-colors duration-300 ${
-                    isScrolled ? "text-[#80776C]" : "text-[#FAF7F0]/90"
-                  }`}
-                >
-                  {SITE_CONFIG.tagline}
-                </span>
               </div>
             </a>
 
@@ -160,20 +145,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
         }`}
       >
         <div className="pt-20">
-          <div className="mb-6 pb-4 border-b border-[#251811]/10 flex items-center gap-3">
+          <div className="mb-6 pb-4 border-b border-[#251811]/10 flex items-center justify-between">
             <img
               src="/images/Glossy Sip & Brew Café Emblem.png"
-              alt="Sip & Brew Emblem"
-              className="w-12 h-12 object-contain"
+              alt="Sip & Brew Logo"
+              className="h-14 w-auto object-contain filter drop-shadow-md"
             />
-            <div>
-              <span className="font-lobster text-3xl font-normal text-[#251811] block leading-tight">
-                Sip &amp; Brew
-              </span>
-              <p className="text-xs uppercase tracking-widest text-[#80776C] mt-0.5">
-                Coffee · Conversation · Comfort.
-              </p>
-            </div>
+            <p className="text-[11px] uppercase tracking-widest text-[#80776C] text-right font-sans font-medium max-w-[160px] leading-tight">
+              Coffee · Conversation · Comfort
+            </p>
           </div>
 
           <nav className="flex flex-col space-y-5">
