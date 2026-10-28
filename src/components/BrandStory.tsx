@@ -123,7 +123,7 @@ export const BrandStory: React.FC = () => {
           </span>
           <h2
             ref={headlineRef}
-            className="font-editorial text-3xl sm:text-5xl md:text-6xl font-normal text-[#251811] tracking-tight text-balance leading-[1.12]"
+            className="font-editorial text-3xl sm:text-5xl md:text-6xl font-medium text-[#251811] tracking-tight text-balance leading-[1.12]"
           >
             {SITE_CONFIG.story.headline}
           </h2>

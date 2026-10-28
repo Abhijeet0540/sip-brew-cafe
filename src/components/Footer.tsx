@@ -103,7 +103,7 @@ export const Footer: React.FC = () => {
         {/* 2. FLOATING NEWSLETTER CALL-TO-ACTION (CTA) SECTION            */}
         {/* ============================================================== */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
-          <h2 className="font-editorial text-3xl sm:text-5xl md:text-6xl font-normal text-[#FAF7F0] tracking-tight leading-[1.12] text-balance drop-shadow-lg px-2">
+          <h2 className="font-editorial text-3xl sm:text-5xl md:text-6xl font-medium text-[#FAF7F0] tracking-tight leading-[1.12] text-balance drop-shadow-lg px-2">
             Join our coffee circle. Fresh updates, pure comfort
           </h2>
 
@@ -207,13 +207,20 @@ export const Footer: React.FC = () => {
                 </div>
               </div>
 
-              <div className="pt-2">
-                <span className="font-editorial text-3xl font-medium tracking-tight block text-[#FAF7F0]">
-                  Sip &amp; Brew
-                </span>
-                <p className="text-xs font-sans text-caramel-200/70 mt-1 max-w-xs leading-relaxed">
-                  Coffee · Conversation · Comfort. A mindful haven for slow mornings and genuine moments.
-                </p>
+              <div className="pt-2 flex items-center gap-3">
+                <img
+                  src="/images/Glossy Sip & Brew Café Emblem.png"
+                  alt="Sip & Brew Emblem"
+                  className="w-12 h-12 object-contain filter drop-shadow-md"
+                />
+                <div>
+                  <span className="font-lobster text-3xl font-normal tracking-wide block text-[#FAF7F0] leading-none">
+                    Sip &amp; Brew
+                  </span>
+                  <p className="text-xs font-sans text-caramel-200/70 mt-1 max-w-xs leading-relaxed">
+                    Coffee · Conversation · Comfort.
+                  </p>
+                </div>
               </div>
             </div>
 

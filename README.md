@@ -65,9 +65,15 @@ Sip & Brew is built upon a warm, soothing palette evoking freshly pulled espress
 | **Warm Ivory** | `#FAF7F0` | ![#FAF7F0](https://via.placeholder.com/15/FAF7F0/000000?text=+) | Card surfaces, modals, crisp contrast |
 | **Soft Cream** | `#F4EFE5` | ![#F4EFE5](https://via.placeholder.com/15/F4EFE5/000000?text=+) | Primary body background |
 
-### Typography
-- **Headings & Display**: *Instrument Serif* / Editorial Serif (classic, refined, warm)
-- **Body & Controls**: *Manrope* / Modern Sans (clean, legible, contemporary)
+### Typography Hierarchy
+| Website Element | Font Family | Weight | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Logo / Brand Wordmark** | *Lobster* | Regular (400) | Distinctive cursive identity without visual clutter |
+| **Hero Heading** | *Playfair Display* | 500–600 | Editorial elegance, welcoming warmth |
+| **Section Headings** | *Playfair Display* | 500 (Medium) | Clear editorial structure & hierarchy |
+| **Menu & Descriptions** | *DM Sans* | 400 (Regular) | Clean readability and modern feel |
+| **Buttons & Navigation** | *DM Sans* | 500–600 | High-contrast clarity and touch precision |
+| **Prices & Labels** | *DM Sans* | 600 (SemiBold) | Instant financial legibility and hierarchy |
 
 ---
 

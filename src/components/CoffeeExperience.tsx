@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Camera, Quote, Sparkles } from "lucide-react";
+import { Camera, ChevronLeft, ChevronRight, Quote, Sparkles } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -20,51 +20,51 @@ const ATMOSPHERE_SLIDES: AtmosphereSlide[] = [
     id: "cup",
     number: "01",
     title: "The Signature Takeaway Cup",
-    subtitle: "Brand Identity · Steaming Comfort",
+    subtitle: "Brand Identity · Botanical Line Art",
     caption:
-      "Crafted in warm cream paper with our distinctive hand-drawn botanical leaves and Sip & Brew emblem. Tactile, insulated, and filled with piping hot fresh coffee.",
-    image: "/images/sip-brew-signature-cup-steaming.jpg",
+      "Crafted in warm cream paper with our distinctive hand-drawn botanical leaves and Sip & Brew emblem. Tactile, insulated, and designed for coffee in hand.",
+    image: "/images/cup-reference.jpg",
     tag: "Original Takeaway Cup",
   },
   {
-    id: "cold-craft",
+    id: "cold-drip",
     number: "02",
-    title: "Crystal Ice & Chilled Brew",
-    subtitle: "Artisan Glassware · Layered Balance",
+    title: "Crystal Ice & Cold Drip",
+    subtitle: "18-Hour Immersion · Low Acidity",
     caption:
-      "Chilled single-origin extraction slowly steeped and poured briskly over dense artisan crystal ice for crisp refreshment and subtle sweetness.",
-    image: "/images/iced-coffee-stone.jpg",
-    tag: "Chilled Craft",
+      "Chilled single-origin extraction slowly steeped to perfection, pouring briskly over dense artisan crystal ice for refreshing clarity.",
+    image: "/images/sip-brew-iced-pour.jpg",
+    tag: "Cold Craft",
   },
   {
     id: "crema",
     number: "03",
     title: "Tiger-Stripe Crema",
-    subtitle: "Calibrated 9-Bar Pull · Stone Hearth",
+    subtitle: "Calibrated 9-Bar Pull · Velvet Texture",
     caption:
-      "Macro extraction showcasing thick golden tiger-stripe crema, rich aroma, and pure cocoa undertones dialed fresh on demand.",
-    image: "/images/espresso-cup.jpg",
+      "Macro extraction showcasing thick golden crema, micro-bubbles, and rich aroma. Every espresso shot is ground and dialed on demand.",
+    image: "/images/crema-espresso.jpg",
     tag: "Espresso Precision",
   },
   {
     id: "morning",
     number: "04",
     title: "Morning Light & Conversations",
-    subtitle: "Natural Wood · Rosetta Microfoam",
+    subtitle: "Natural Oak · Quiet Moments",
     caption:
-      "A warm sunlit table with freshly poured cappuccino, intricate latte art, and room to think. Sip & Brew invites you to pause and savor the moment.",
-    image: "/images/cappuccino.jpg",
+      "A sunlit table with two handmade cups, open notebooks, and room to think. Sip & Brew is an invitation to slow down and savor the morning.",
+    image: "/images/cozy-table-cups.jpg",
     tag: "Café Ambiance",
   },
   {
-    id: "frappe",
+    id: "roasting",
     number: "05",
-    title: "Thick Blended Indulgence",
-    subtitle: "70% Bittersweet Cocoa · Whipped Cloud",
+    title: "Fresh Micro-Batch Beans",
+    subtitle: "100% Arabica · Sustainable Sourcing",
     caption:
-      "Frosty mocha and white chocolate frappes blended thick with cold dairy, rich chocolate ganache, and crowned with cocoa dusting.",
-    image: "/images/dark-mocha-frappe-premium.jpg",
-    tag: "Blended Specialty",
+      "Sourced from responsible estate harvests, our beans are micro-batch roasted to preserve delicate notes of caramel, dark chocolate, and wildflower honey.",
+    image: "/images/sip-brew-roasting-beans.jpg",
+    tag: "Artisanal Roast",
   },
 ];
 
@@ -76,10 +76,7 @@ export const CoffeeExperience: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      if (
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-        window.innerWidth < 768
-      ) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         return;
       }
 
@@ -118,44 +115,56 @@ export const CoffeeExperience: React.FC = () => {
     return () => ctx.revert();
   }, []);
 
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev === 0 ? ATMOSPHERE_SLIDES.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev === ATMOSPHERE_SLIDES.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <section
       id="experience"
       ref={sectionRef}
-      className="py-20 sm:py-36 bg-[#FAF7F0] text-[#251811] relative overflow-hidden border-b border-[#251811]/10"
+      className="py-28 sm:py-36 bg-[#FAF7F0] text-[#251811] relative overflow-hidden border-b border-[#251811]/10"
     >
-      {/* Floating Coffee Beans Background Showcase */}
-      <div className="absolute top-8 left-2 sm:left-8 w-28 sm:w-44 md:w-56 opacity-30 pointer-events-none select-none z-0 animate-float-slow mix-blend-multiply filter drop-shadow-md">
-        <img
-          src="/images/coffee-ai-generated.png"
-          alt=""
-          aria-hidden="true"
-          className="w-full h-auto object-contain transform -rotate-12"
-        />
-      </div>
-     
-      <div className="absolute bottom-10 right-2 sm:right-8 w-24 sm:w-36 md:w-48 opacity-35 pointer-events-none select-none z-0 animate-float-reverse mix-blend-multiply filter drop-shadow-md">
-        <img
-          src="/images/roasted-coffee-beans-isolated.png"
-          alt=""
-          aria-hidden="true"
-          className="w-full h-auto object-contain transform rotate-12"
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div ref={headerRef} className="max-w-3xl mx-auto text-center mb-10 sm:mb-16">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-coffee-600 mb-3">
-            <Camera className="w-3.5 h-3.5 text-caramel-500" />
-            <span>The Atmosphere</span>
+        <div ref={headerRef} className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-coffee-600 mb-3">
+              <Camera className="w-3.5 h-3.5 text-caramel-500" />
+              <span>The Atmosphere</span>
+            </div>
+            <h2 className="font-editorial text-4xl sm:text-5xl md:text-6xl font-medium text-[#251811] tracking-tight leading-[1.12]">
+              Find your moment.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg font-sans text-[#80776C] leading-relaxed">
+              Explore our world through this expanding visual slider. Tap or hover each panel to reveal the craft, the space, and our signature botanical takeaway cup.
+            </p>
           </div>
-          <h2 className="font-editorial text-3xl sm:text-5xl md:text-6xl font-normal text-[#251811] tracking-tight leading-[1.12]">
-            Find your moment.
-          </h2>
-          <p className="mt-4 text-sm sm:text-lg font-sans text-[#80776C] leading-relaxed">
-            Explore our world through this expanding visual slider. Tap each panel to reveal the craft, the space, and our signature botanical takeaway cup.
-          </p>
+
+          {/* Slider Controls */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handlePrev}
+              aria-label="Previous panel"
+              className="w-12 h-12 rounded-full bg-[#F4EFE5] border border-[#251811]/15 flex items-center justify-center text-[#251811] hover:bg-[#251811] hover:text-[#FAF7F0] hover:border-[#251811] transition-all duration-300 shadow-warm-sm focus:outline-none focus:ring-2 focus:ring-caramel-500"
+            >
+              <ChevronLeft className="w-5 h-5 stroke-[2]" />
+            </button>
+            <span className="text-xs font-mono font-semibold text-[#80776C] px-2">
+              0{activeIndex + 1} / 0{ATMOSPHERE_SLIDES.length}
+            </span>
+            <button
+              onClick={handleNext}
+              aria-label="Next panel"
+              className="w-12 h-12 rounded-full bg-[#F4EFE5] border border-[#251811]/15 flex items-center justify-center text-[#251811] hover:bg-[#251811] hover:text-[#FAF7F0] hover:border-[#251811] transition-all duration-300 shadow-warm-sm focus:outline-none focus:ring-2 focus:ring-caramel-500"
+            >
+              <ChevronRight className="w-5 h-5 stroke-[2]" />
+            </button>
+          </div>
         </div>
 
         {/* ============================================================== */}
@@ -186,11 +195,10 @@ export const CoffeeExperience: React.FC = () => {
                   willChange: "flex-grow, flex-basis",
                   transition: "flex 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease",
                 }}
-                className={`group relative rounded-3xl overflow-hidden cursor-pointer border border-[#251811]/15 shadow-warm-md focus:outline-none focus:ring-2 focus:ring-caramel-500 ${
-                  isExpanded
+                className={`group relative rounded-3xl overflow-hidden cursor-pointer border border-[#251811]/15 shadow-warm-md focus:outline-none focus:ring-2 focus:ring-caramel-500 ${isExpanded
                     ? "flex-[3.5] lg:flex-[3.5] shadow-warm-xl"
                     : "flex-1 lg:flex-1 hover:border-caramel-500/50"
-                }`}
+                  }`}
               >
                 {/* Background Image with smooth zoom */}
                 <img
@@ -199,11 +207,10 @@ export const CoffeeExperience: React.FC = () => {
                   style={{
                     transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease",
                   }}
-                  className={`absolute inset-0 w-full h-full object-cover object-center ${
-                    isExpanded
+                  className={`absolute inset-0 w-full h-full object-cover object-center ${isExpanded
                       ? "scale-105 filter brightness-[0.92] contrast-[1.05]"
                       : "scale-100 filter brightness-[0.62] contrast-[0.95] group-hover:brightness-[0.75]"
-                  }`}
+                    }`}
                   loading="lazy"
                   decoding="async"
                 />
@@ -211,20 +218,18 @@ export const CoffeeExperience: React.FC = () => {
                 {/* Layered Gradient Overlays */}
                 <div
                   style={{ transition: "opacity 0.6s ease" }}
-                  className={`absolute inset-0 bg-gradient-to-t from-[#251811]/95 via-[#251811]/40 to-transparent ${
-                    isExpanded ? "opacity-90" : "opacity-85"
-                  }`}
+                  className={`absolute inset-0 bg-gradient-to-t from-[#251811]/95 via-[#251811]/40 to-transparent ${isExpanded ? "opacity-90" : "opacity-85"
+                    }`}
                 />
 
                 {/* Top Header Badge & Number */}
                 <div className="absolute top-5 left-5 right-5 z-20 flex items-center justify-between pointer-events-none">
                   <span
                     style={{ transition: "all 0.4s ease" }}
-                    className={`px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider ${
-                      isExpanded
+                    className={`px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider ${isExpanded
                         ? "bg-[#FAF7F0] text-[#251811] shadow-warm-sm"
                         : "bg-[#251811]/75 backdrop-blur-md text-[#FAF7F0] border border-[#FAF7F0]/20"
-                    }`}
+                      }`}
                   >
                     {slide.tag}
                   </span>
@@ -251,24 +256,23 @@ export const CoffeeExperience: React.FC = () => {
                   style={{
                     transition: "opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s",
                   }}
-                  className={`absolute bottom-0 left-0 right-0 p-5 sm:p-8 lg:p-10 z-20 text-[#FAF7F0] flex flex-col justify-end ${
-                    isExpanded
+                  className={`absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:p-10 z-20 text-[#FAF7F0] flex flex-col justify-end ${isExpanded
                       ? "opacity-100 translate-y-0 pointer-events-auto"
                       : "opacity-0 translate-y-6 pointer-events-none"
-                  }`}
+                    }`}
                 >
                   <div className="max-w-xl">
-                    <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-semibold text-caramel-300 block mb-1 sm:mb-2">
+                    <span className="text-xs uppercase tracking-[0.2em] font-semibold text-caramel-300 block mb-2">
                       {slide.subtitle}
                     </span>
-                    <h3 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-normal leading-[1.1] mb-2 sm:mb-3 text-balance">
+                    <h3 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-medium leading-[1.1] mb-3 text-balance">
                       {slide.title}
                     </h3>
-                    <p className="text-xs sm:text-sm font-sans text-[#FAF7F0]/85 leading-relaxed max-w-lg line-clamp-3 sm:line-clamp-none">
+                    <p className="text-xs sm:text-sm font-sans text-[#FAF7F0]/85 leading-relaxed max-w-lg">
                       {slide.caption}
                     </p>
 
-                    <div className="mt-3 sm:mt-5 flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-caramel-400">
+                    <div className="mt-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-caramel-400">
                       <Sparkles className="w-3.5 h-3.5" />
                       <span>Sip &amp; Brew Atmosphere</span>
                     </div>
@@ -278,9 +282,8 @@ export const CoffeeExperience: React.FC = () => {
                 {/* Active Indicator Bar at Bottom */}
                 <div
                   style={{ transition: "opacity 0.5s ease" }}
-                  className={`absolute bottom-0 left-0 right-0 h-1 bg-caramel-500 ${
-                    isExpanded ? "opacity-100" : "opacity-0"
-                  }`}
+                  className={`absolute bottom-0 left-0 right-0 h-1 bg-caramel-500 ${isExpanded ? "opacity-100" : "opacity-0"
+                    }`}
                 />
               </div>
             );

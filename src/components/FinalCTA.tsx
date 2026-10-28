@@ -49,7 +49,7 @@ export const FinalCTA: React.FC = () => {
           Coffee · Conversation · Comfort
         </span>
 
-        <h2 className="font-editorial text-4xl sm:text-6xl md:text-7xl font-normal text-[#251811] tracking-tight leading-[1.08] text-balance">
+        <h2 className="font-editorial text-4xl sm:text-6xl md:text-7xl font-medium text-[#251811] tracking-tight leading-[1.08] text-balance">
           Make room for a little coffee happiness.
         </h2>
 

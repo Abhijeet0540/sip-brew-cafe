@@ -93,7 +93,7 @@ export const FeaturedDrinks: React.FC<FeaturedDrinksProps> = ({ onSelectItem }) 
               <Sparkles className="w-3.5 h-3.5 text-caramel-500" />
               <span>Curated Selections</span>
             </div>
-            <h2 className="font-editorial text-3xl sm:text-5xl md:text-6xl font-normal text-[#251811] tracking-tight leading-[1.1]">
+            <h2 className="font-editorial text-3xl sm:text-5xl md:text-6xl font-medium text-[#251811] tracking-tight leading-[1.1]">
               Signature Coffee Experience
             </h2>
             <p className="mt-4 text-base sm:text-lg font-sans text-[#80776C] leading-relaxed">

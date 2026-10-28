@@ -27,7 +27,7 @@ export const MenuCategory: React.FC<MenuCategoryProps> = ({
               {category.subtitle}
             </span>
           </div>
-          <h3 className="font-editorial text-3xl sm:text-4xl text-[#251811] font-normal tracking-tight">
+          <h3 className="font-editorial text-3xl sm:text-4xl text-[#251811] font-medium tracking-tight">
             {category.name}
           </h3>
         </div>
@@ -70,7 +70,7 @@ export const MenuCategory: React.FC<MenuCategoryProps> = ({
                       {item.name}
                     </h4>
                   </div>
-                  <span className="font-sans font-bold text-base sm:text-lg text-[#251811] flex-shrink-0">
+                  <span className="font-sans font-semibold text-base sm:text-lg text-[#251811] flex-shrink-0">
                     ₹{item.price}
                   </span>
                 </div>

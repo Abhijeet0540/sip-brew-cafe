@@ -243,10 +243,10 @@ export const Hero: React.FC = () => {
           {/* Main Headline */}
           <h1
             ref={headlineRef}
-            className="font-editorial text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] font-normal tracking-tight text-[#FAF7F0] leading-[1.08] text-balance drop-shadow-sm"
+            className="font-editorial text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] font-medium md:font-semibold tracking-tight text-[#FAF7F0] leading-[1.08] text-balance drop-shadow-sm"
           >
             Good Coffee. <br />
-            <span className="italic font-light text-caramel-300">
+            <span className="italic font-medium text-caramel-300">
               Great Conversations.
             </span>
           </h1>
