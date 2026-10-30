@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,13 +10,10 @@ import { MenuSection } from "./components/MenuSection";
 import { CoffeeExperience } from "./components/CoffeeExperience";
 import { VisitSection } from "./components/VisitSection";
 import { Footer } from "./components/Footer";
-import { MenuItem } from "./data/menu";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const App: React.FC = () => {
-  const [selectedItemModal, setSelectedItemModal] = useState<MenuItem | null>(null);
-
   // Initialize Lenis buttery-smooth inertial scrolling synced with GSAP ScrollTrigger
   useEffect(() => {
     // Respect user's reduced motion settings
@@ -26,7 +23,7 @@ export const App: React.FC = () => {
 
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Silky smooth exponential ease
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential ease
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
@@ -63,35 +60,32 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F4EFE5] text-[#251811] flex flex-col selection:bg-caramel-500/30 selection:text-[#251811]">
-      {/* Sticky Refined Navigation */}
+    <div className="min-h-screen bg-[#FBF8F3] text-[#1E1714] flex flex-col selection:bg-[#C58A4B]/25 selection:text-[#1E1714]">
+      {/* 01. Announcement Bar & Minimalist Sticky Editorial Header */}
       <Navbar />
 
-      {/* Main Sections */}
+      {/* Main Editorial Sections */}
       <main className="flex-grow">
-        {/* 01. Hero - Cinematic First Impression */}
+        {/* 02. The Editorial Hero - Asymmetric Split Layout & Monumental Typography */}
         <Hero />
 
-        {/* 02. Brand Story - Scroll-Triggered Editorial Storytelling */}
+        {/* 03. Brand Manifesto ("A Moment to Yourself") - Two-Column Spread */}
         <BrandStory />
 
-        {/* 03. Signature Coffee Experience - Curated Showcase */}
-        <FeaturedDrinks onSelectItem={(item) => setSelectedItemModal(item)} />
+        {/* 04. Curated Signatures Showcase - Lookbook Grid of 6 Drinks */}
+        <FeaturedDrinks />
 
-        {/* 04. Complete Beverage Menu - All 6 Categories & Exact Prices */}
-        <MenuSection
-          selectedItemModal={selectedItemModal}
-          onSelectItem={(item) => setSelectedItemModal(item)}
-        />
+        {/* 05. Interactive Complete Beverage Menu - All 35 Drinks in Open Ledger */}
+        <MenuSection />
 
-        {/* 05. The Atmosphere - The Sip & Brew Experience */}
+        {/* 06. The Atmosphere & Craft Lookbook - Visual Photo Essay */}
         <CoffeeExperience />
 
-        {/* 06. Visit The Café - Location, Hours & Direct Contact */}
+        {/* 07. Destination, Hours & Direct Contact - Store Destination Guide */}
         <VisitSection />
       </main>
 
-      {/* 07. Modern High-End Floating Newsletter CTA & 3-Column Dark Green Card Footer */}
+      {/* 08. Refined Editorial Footer */}
       <Footer />
     </div>
   );

@@ -53,26 +53,29 @@ A high-end, responsive web experience designed for an artisanal specialty café 
 
 ---
 
-## 🎨 Design System & Brand Palette
+## 🎨 Editorial Design System & Brand Palette
 
-Sip & Brew is built upon a warm, soothing palette evoking freshly pulled espresso, velvety milk foam, and natural stone textures:
+Sip & Brew is art-directed as an editorial specialty coffee experience inspired by Kinfolk, Cereal Magazine, and modern third-wave roasteries:
 
-| Token | Hex Code | Preview | Usage |
-| :--- | :--- | :---: | :--- |
-| **Deep Espresso** | `#251811` | ![#251811](https://via.placeholder.com/15/251811/000000?text=+) | Primary text, dark backgrounds, footer |
-| **Rich Coffee Brown** | `#68442F` | ![#68442F](https://via.placeholder.com/15/68442F/000000?text=+) | Accent badges, category highlights |
-| **Golden Caramel** | `#B88A5A` | ![#B88A5A](https://via.placeholder.com/15/B88A5A/000000?text=+) | Accent rings, interactive buttons, icons |
-| **Warm Ivory** | `#FAF7F0` | ![#FAF7F0](https://via.placeholder.com/15/FAF7F0/000000?text=+) | Card surfaces, modals, crisp contrast |
-| **Soft Cream** | `#F4EFE5` | ![#F4EFE5](https://via.placeholder.com/15/F4EFE5/000000?text=+) | Primary body background |
+| Token | Hex Code | Purpose |
+| :--- | :--- | :--- |
+| **Cream Light** | `#FBF8F3` | Primary page background |
+| **Cream Sand** | `#F4EFE6` | Secondary tinted panels & cards |
+| **Cream Linen** | `#EDE6DB` | Tertiary accents, chips & subtle fills |
+| **Espresso** | `#1E1714` | Deep roasted espresso body & display |
+| **Espresso Muted** | `#685952` | Editorial subtext & descriptions |
+| **Caramel** | `#C58A4B` | Golden toffee highlight |
+| **Cinnamon** | `#8C5832` | Warm earthy brown accent |
+| **Olive** | `#4E5D46` | Muted botanical olive accent |
+| **Forest** | `#354130` | Deep botanical contrast |
+| **Hairline Border** | `rgba(30, 23, 20, 0.08)` | Minimalist dividing rules & borders |
 
 ### Typography Hierarchy
 | Website Element | Font Family | Weight | Purpose |
 | :--- | :--- | :--- | :--- |
-| **Logo / Brand Wordmark** | *Lobster* | Regular (400) | Distinctive cursive identity without visual clutter |
-| **Hero Heading** | *Playfair Display* | 500–600 | Editorial elegance, welcoming warmth |
-| **Section Headings** | *Playfair Display* | 500 (Medium) | Clear editorial structure & hierarchy |
-| **Menu & Descriptions** | *DM Sans* | 400 (Regular) | Clean readability and modern feel |
-| **Buttons & Navigation** | *DM Sans* | 500–600 | High-contrast clarity and touch precision |
+| **Headings & Display** | *Instrument Serif* | 400, 400i | Elegant, expressive editorial voice |
+| **Body, Descriptions** | *DM Sans* | 400 (Regular) | Clean readability and modern humanist feel |
+| **Navigation & Buttons** | *DM Sans* | 500–600 | High-contrast clarity and touch precision |
 | **Prices & Labels** | *DM Sans* | 600 (SemiBold) | Instant financial legibility and hierarchy |
 
 ---

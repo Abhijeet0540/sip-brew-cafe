@@ -17,11 +17,13 @@ export interface SiteConfig {
   contact: {
     phone: string;
     displayPhone: string;
+    telLink?: string;
     whatsappNumber: string;
     whatsappMessage: string;
     instagramHandle: string;
     instagramUrl: string;
     email: string;
+    emailLink?: string;
   };
   location: {
     shopName: string;
@@ -31,6 +33,7 @@ export interface SiteConfig {
     city: string;
     state: string;
     pincode: string;
+    fullAddress?: string;
     landmark: string;
     googleMapsUrl: string;
     embedMapUrl: string;
@@ -84,20 +87,23 @@ export const SITE_CONFIG: SiteConfig = {
   contact: {
     phone: "+91 79 7207 0329",
     displayPhone: "+91 79 7207 0329",
+    telLink: "tel:+917972070329",
     whatsappNumber: "917972070329",
-    whatsappMessage: "Hi Sip & Brew! I would love to order / inquire about your menu.",
+    whatsappMessage: "Hi Sip & Brew, I would like to inquire about ordering.",
     instagramHandle: "@sipandbrewcafee",
-    instagramUrl: "https://www.instagram.com/sipandbrewcafee?rpxt=ZDNlZDc0MzIxNw==",
+    instagramUrl: "https://www.instagram.com/sipandbrewcafee",
     email: "sipandbrew@outlook.com",
+    emailLink: "mailto:sipandbrew@outlook.com",
   },
   location: {
     shopName: "Sip & Brew Cafe",
     addressLine1: "Shop No. C1, Rahul Apartment",
-    addressLine2: "Ring Road, Mangalmurti Square",
+    addressLine2: "Ring Road, Parsodi",
     area: "Parsodi",
     city: "Nagpur",
     state: "Maharashtra",
     pincode: "440022",
+    fullAddress: "Shop No. C1, Rahul Apartment, Landmark: Mangalmurti Square, Ring Road, Parsodi, Nagpur, Maharashtra - 440022",
     landmark: "Mangalmurti Square, Ring Road",
     googleMapsUrl: "https://maps.app.goo.gl/jcVjD1vFryu3GF7BA?g_st=aw",
     embedMapUrl:
@@ -109,14 +115,25 @@ export const SITE_CONFIG: SiteConfig = {
   },
   hours: [
     {
-      days: "Monday - Friday",
-      time: "10:00 AM - 11:30 PM",
-      notes: "Fresh brews & takeaway all day",
-    },
-    {
-      days: "Saturday - Sunday",
-      time: "10:00 AM - 11:45 PM",
-      notes: "Weekend slow-brew specials",
+      days: "Monday – Sunday (Daily)",
+      time: "10:00 AM – 11:30 PM",
+      notes: "Open daily for dine-in & takeaway",
     },
   ],
 };
+
+/**
+ * Generates direct 1-tap WhatsApp order links according to prompt spec:
+ * https://wa.me/917972070329?text=Hi%20Sip%20%26%20Brew%2C%20I%20would%20like%20to%20order%20the%20{DrinkName}%20({Price})
+ */
+export const getWhatsAppOrderLink = (drinkName?: string, price?: number | string): string => {
+  if (!drinkName) {
+    return "https://wa.me/917972070329?text=Hi%20Sip%20%26%20Brew%2C%20I%20would%20like%20to%20order";
+  }
+  const priceFormatted = typeof price === "number" ? `₹${price}` : price || "";
+  const msg = priceFormatted
+    ? `Hi Sip & Brew, I would like to order the ${drinkName} (${priceFormatted})`
+    : `Hi Sip & Brew, I would like to order the ${drinkName}`;
+  return `https://wa.me/917972070329?text=${encodeURIComponent(msg)}`;
+};
+

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Camera, ChevronLeft, ChevronRight, Quote, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -24,22 +24,22 @@ const ATMOSPHERE_SLIDES: AtmosphereSlide[] = [
     caption:
       "Crafted in warm cream paper with our distinctive hand-drawn botanical leaves and Sip & Brew emblem. Tactile, insulated, and designed for coffee in hand.",
     image: "/images/sip-brew-signature-cup-steaming.jpg",
-    tag: "Original Takeaway Cup",
+    tag: "Brand Identity",
   },
   {
     id: "cold-drip",
     number: "02",
-    title: "Crystal Ice & Cold Drip",
+    title: "Crystal Ice & Slow Cold Drip",
     subtitle: "18-Hour Immersion · Low Acidity",
     caption:
       "Chilled single-origin extraction slowly steeped to perfection, pouring briskly over dense artisan crystal ice for refreshing clarity.",
     image: "/images/sip-brew-iced-pour.jpg",
-    tag: "Cold Craft",
+    tag: "Slow Immersion",
   },
   {
     id: "crema",
     number: "03",
-    title: "Tiger-Stripe Crema",
+    title: "Tiger-Stripe Crema Extraction",
     subtitle: "Calibrated 9-Bar Pull · Velvet Texture",
     caption:
       "Macro extraction showcasing thick golden crema, micro-bubbles, and rich aroma. Every espresso shot is ground and dialed on demand.",
@@ -82,7 +82,7 @@ export const CoffeeExperience: React.FC = () => {
 
       gsap.fromTo(
         headerRef.current,
-        { opacity: 0, y: 35 },
+        { opacity: 0, y: 25 },
         {
           opacity: 1,
           y: 0,
@@ -97,11 +97,10 @@ export const CoffeeExperience: React.FC = () => {
 
       gsap.fromTo(
         sliderRef.current,
-        { opacity: 0, y: 40, scale: 0.98 },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
-          scale: 1,
           duration: 1,
           ease: "power3.out",
           scrollTrigger: {
@@ -125,53 +124,56 @@ export const CoffeeExperience: React.FC = () => {
 
   return (
     <section
-      id="experience"
+      id="atmosphere"
       ref={sectionRef}
-      className="py-28 sm:py-36 bg-[#FAF7F0] text-[#251811] relative overflow-hidden border-b border-[#251811]/10"
+      className="py-24 sm:py-32 lg:py-40 bg-[#FBF8F3] text-[#1E1714] border-b border-[#1E1714]/08"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div ref={headerRef} className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+        <div
+          ref={headerRef}
+          className="flex flex-col md:flex-row md:items-end justify-between pb-10 mb-12 sm:mb-16 border-b border-[#1E1714]/10 gap-6"
+        >
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-coffee-600 mb-3">
-              <Camera className="w-3.5 h-3.5 text-caramel-500" />
-              <span>The Atmosphere</span>
+            <div className="flex items-center gap-2 text-xs font-sans font-semibold uppercase tracking-[0.25em] text-[#8C5832] mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C58A4B]" />
+              <span>Photo Essay</span>
             </div>
-            <h2 className="font-editorial text-4xl sm:text-5xl md:text-6xl font-medium text-[#251811] tracking-tight leading-[1.12]">
-              Find your moment.
+            <h2 className="font-editorial text-4xl sm:text-6xl lg:text-7xl font-normal text-[#1E1714] tracking-tight leading-[1.06]">
+              The Space &amp; Craft
             </h2>
-            <p className="mt-4 text-base sm:text-lg font-sans text-[#80776C] leading-relaxed">
-              Explore our world through this expanding visual slider. Tap or hover each panel to reveal the craft, the space, and our signature botanical takeaway cup.
+            <p className="mt-4 text-base sm:text-lg font-sans text-[#685952] leading-relaxed">
+              An intimate look into our slow extraction rituals, warm tactile ceramics, and our signature botanical takeaway cup.
             </p>
           </div>
 
-          {/* Slider Controls */}
+          {/* Slider Pagination Controls */}
           <div className="flex items-center gap-3">
             <button
               onClick={handlePrev}
-              aria-label="Previous panel"
-              className="w-12 h-12 rounded-full bg-[#F4EFE5] border border-[#251811]/15 flex items-center justify-center text-[#251811] hover:bg-[#251811] hover:text-[#FAF7F0] hover:border-[#251811] transition-all duration-300 shadow-warm-sm focus:outline-none focus:ring-2 focus:ring-caramel-500"
+              aria-label="Previous essay panel"
+              className="w-11 h-11 rounded-full bg-[#F4EFE6] border border-[#1E1714]/15 flex items-center justify-center text-[#1E1714] hover:bg-[#1E1714] hover:text-[#FBF8F3] transition-all duration-200"
             >
-              <ChevronLeft className="w-5 h-5 stroke-[2]" />
+              <ChevronLeft className="w-4 h-4 stroke-[1.75]" />
             </button>
-            <span className="text-xs font-mono font-semibold text-[#80776C] px-2">
+            <span className="text-xs font-sans font-medium text-[#685952] px-2 tracking-widest">
               0{activeIndex + 1} / 0{ATMOSPHERE_SLIDES.length}
             </span>
             <button
               onClick={handleNext}
-              aria-label="Next panel"
-              className="w-12 h-12 rounded-full bg-[#F4EFE5] border border-[#251811]/15 flex items-center justify-center text-[#251811] hover:bg-[#251811] hover:text-[#FAF7F0] hover:border-[#251811] transition-all duration-300 shadow-warm-sm focus:outline-none focus:ring-2 focus:ring-caramel-500"
+              aria-label="Next essay panel"
+              className="w-11 h-11 rounded-full bg-[#F4EFE6] border border-[#1E1714]/15 flex items-center justify-center text-[#1E1714] hover:bg-[#1E1714] hover:text-[#FBF8F3] transition-all duration-200"
             >
-              <ChevronRight className="w-5 h-5 stroke-[2]" />
+              <ChevronRight className="w-4 h-4 stroke-[1.75]" />
             </button>
           </div>
         </div>
 
-        {/* ============================================================== */}
-        {/* EXPANDING ACCORDION SLIDER (FLEXBOX ACCORDION SLIDER)           */}
-        {/* SILKY SMOOTH CSS TRANSITIONS AND HARDWARE ACCELERATION         */}
-        {/* ============================================================== */}
-        <div ref={sliderRef} className="flex flex-col lg:flex-row gap-4 h-[720px] lg:h-[580px] w-full select-none">
+        {/* Visual Photo Essay Accordion Slider */}
+        <div
+          ref={sliderRef}
+          className="flex flex-col lg:flex-row gap-4 h-[740px] lg:h-[580px] w-full select-none"
+        >
           {ATMOSPHERE_SLIDES.map((slide, idx) => {
             const isExpanded = idx === activeIndex;
 
@@ -193,111 +195,105 @@ export const CoffeeExperience: React.FC = () => {
                 }}
                 style={{
                   willChange: "flex-grow, flex-basis",
-                  transition: "flex 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease",
+                  transition: "flex 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease",
                 }}
-                className={`group relative rounded-3xl overflow-hidden cursor-pointer border border-[#251811]/15 shadow-warm-md focus:outline-none focus:ring-2 focus:ring-caramel-500 ${isExpanded
-                    ? "flex-[3.5] lg:flex-[3.5] shadow-warm-xl"
-                    : "flex-1 lg:flex-1 hover:border-caramel-500/50"
-                  }`}
+                className={`group relative rounded-2xl overflow-hidden cursor-pointer border border-[#1E1714]/15 shadow-sm focus:outline-none focus:ring-1 focus:ring-[#C58A4B] ${
+                  isExpanded
+                    ? "flex-[3.5] lg:flex-[3.5] shadow-md"
+                    : "flex-1 lg:flex-1 hover:border-[#1E1714]/30"
+                }`}
               >
-                {/* Background Image with smooth zoom */}
+                {/* Background Image */}
                 <img
                   src={slide.image}
                   alt={slide.title}
                   style={{
-                    transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease",
+                    transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
                   }}
-                  className={`absolute inset-0 w-full h-full object-cover object-center ${isExpanded
-                      ? "scale-105 filter brightness-[0.92] contrast-[1.05]"
-                      : "scale-100 filter brightness-[0.62] contrast-[0.95] group-hover:brightness-[0.75]"
-                    }`}
+                  className={`absolute inset-0 w-full h-full object-cover object-center ${
+                    isExpanded
+                      ? "scale-105 filter brightness-[0.88] contrast-[1.02]"
+                      : "scale-100 filter brightness-[0.6] contrast-[0.95] group-hover:brightness-[0.75]"
+                  }`}
                   loading="lazy"
-                  decoding="async"
                 />
 
-                {/* Layered Gradient Overlays */}
+                {/* Subtle Gradient Veil */}
                 <div
-                  style={{ transition: "opacity 0.6s ease" }}
-                  className={`absolute inset-0 bg-gradient-to-t from-[#251811]/95 via-[#251811]/40 to-transparent ${isExpanded ? "opacity-90" : "opacity-85"
-                    }`}
+                  className={`absolute inset-0 bg-gradient-to-t from-[#1E1714]/95 via-[#1E1714]/35 to-transparent transition-opacity duration-500 ${
+                    isExpanded ? "opacity-90" : "opacity-80"
+                  }`}
                 />
 
-                {/* Top Header Badge & Number */}
+                {/* Top Label & Numeric Index */}
                 <div className="absolute top-5 left-5 right-5 z-20 flex items-center justify-between pointer-events-none">
                   <span
-                    style={{ transition: "all 0.4s ease" }}
-                    className={`px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider ${isExpanded
-                        ? "bg-[#FAF7F0] text-[#251811] shadow-warm-sm"
-                        : "bg-[#251811]/75 backdrop-blur-md text-[#FAF7F0] border border-[#FAF7F0]/20"
-                      }`}
+                    className={`px-3 py-1 rounded-full text-[10px] font-sans font-semibold uppercase tracking-wider ${
+                      isExpanded
+                        ? "bg-[#FBF8F3] text-[#1E1714]"
+                        : "bg-[#1E1714]/75 text-[#FBF8F3] border border-[#FBF8F3]/20"
+                    }`}
                   >
                     {slide.tag}
                   </span>
 
-                  <span className="font-editorial text-2xl font-light text-[#FAF7F0]/90">
+                  <span className="font-editorial text-2xl font-light text-[#FBF8F3]/90">
                     {slide.number}
                   </span>
                 </div>
 
-                {/* Collapsed State: Vertical Typography on Desktop */}
+                {/* Collapsed State: Vertical Editorial Label on Desktop */}
                 {!isExpanded && (
-                  <div
-                    style={{ transition: "opacity 0.4s ease 0.15s" }}
-                    className="hidden lg:flex absolute inset-0 z-10 flex-col items-center justify-end pb-10 pointer-events-none"
-                  >
-                    <span className="font-editorial text-2xl text-[#FAF7F0] [writing-mode:vertical-rl] transform rotate-180 tracking-wide opacity-90 group-hover:text-caramel-300 transition-colors">
+                  <div className="hidden lg:flex absolute inset-0 z-10 flex-col items-center justify-end pb-10 pointer-events-none">
+                    <span className="font-editorial text-2xl text-[#FBF8F3] [writing-mode:vertical-rl] transform rotate-180 tracking-wide opacity-90 group-hover:text-[#C58A4B] transition-colors">
                       {slide.title}
                     </span>
                   </div>
                 )}
 
-                {/* Expanded State: Smooth Text Reveal */}
+                {/* Expanded State: Editorial Reveal */}
                 <div
                   style={{
-                    transition: "opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s",
+                    transition:
+                      "opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s",
                   }}
-                  className={`absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:p-10 z-20 text-[#FAF7F0] flex flex-col justify-end ${isExpanded
+                  className={`absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:p-10 z-20 text-[#FBF8F3] flex flex-col justify-end ${
+                    isExpanded
                       ? "opacity-100 translate-y-0 pointer-events-auto"
-                      : "opacity-0 translate-y-6 pointer-events-none"
-                    }`}
+                      : "opacity-0 translate-y-4 pointer-events-none"
+                  }`}
                 >
                   <div className="max-w-xl">
-                    <span className="text-xs uppercase tracking-[0.2em] font-semibold text-caramel-300 block mb-2">
+                    <span className="text-[11px] font-sans uppercase tracking-[0.2em] font-semibold text-[#C58A4B] block mb-2">
                       {slide.subtitle}
                     </span>
-                    <h3 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-medium leading-[1.1] mb-3 text-balance">
+                    <h3 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-normal leading-[1.08] mb-3 text-balance">
                       {slide.title}
                     </h3>
-                    <p className="text-xs sm:text-sm font-sans text-[#FAF7F0]/85 leading-relaxed max-w-lg">
+                    <p className="text-xs sm:text-sm font-sans text-[#EDE6DB] leading-relaxed max-w-lg">
                       {slide.caption}
                     </p>
-
-                    <div className="mt-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-caramel-400">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      <span>Sip &amp; Brew Atmosphere</span>
-                    </div>
                   </div>
                 </div>
 
-                {/* Active Indicator Bar at Bottom */}
+                {/* Active Indicator Bar */}
                 <div
-                  style={{ transition: "opacity 0.5s ease" }}
-                  className={`absolute bottom-0 left-0 right-0 h-1 bg-caramel-500 ${isExpanded ? "opacity-100" : "opacity-0"
-                    }`}
+                  className={`absolute bottom-0 left-0 right-0 h-1 bg-[#C58A4B] transition-opacity duration-300 ${
+                    isExpanded ? "opacity-100" : "opacity-0"
+                  }`}
                 />
               </div>
             );
           })}
         </div>
 
-        {/* Ambient Brand Quote */}
-        <div className="mt-16 sm:mt-20 p-8 sm:p-12 rounded-3xl bg-[#F4EFE5] border border-[#251811]/10 text-center relative overflow-hidden shadow-warm-sm">
-          <Quote className="w-10 h-10 text-caramel-500/30 mx-auto mb-4" />
-          <p className="font-editorial text-2xl sm:text-3xl md:text-4xl text-[#251811] max-w-3xl mx-auto leading-relaxed italic">
-            "Coffee isn't just fuel to get through the day. It’s an invitation to pause, exhale, and savor the company you keep."
+        {/* Ambient Editorial Quote */}
+        <div className="mt-16 sm:mt-20 p-8 sm:p-12 rounded-2xl bg-[#F4EFE6] border border-[#1E1714]/10 text-center max-w-4xl mx-auto">
+          <p className="font-editorial text-2xl sm:text-3xl md:text-4xl text-[#1E1714] leading-relaxed italic">
+            "Coffee isn't just fuel to get through the day. It's an invitation to pause, exhale, and savor the company you keep."
           </p>
-          <span className="block mt-4 text-xs uppercase tracking-widest text-coffee-600 font-sans font-semibold">
-            — The Sip &amp; Brew Philosophy
+          <span className="block mt-4 text-xs font-sans uppercase tracking-[0.2em] text-[#8C5832]">
+            — The Sip &amp; Brew Philosophy · Nagpur
           </span>
         </div>
       </div>

@@ -421,9 +421,10 @@ export const MENU_ITEMS: MenuItem[] = [
 
 export const FEATURED_DRINKS: MenuItem[] = [
   MENU_ITEMS.find((item) => item.name === "Cracked Chocolate Iced Latte")!,
-  MENU_ITEMS.find((item) => item.name === "Nutella Iced Latte")!,
+  MENU_ITEMS.find((item) => item.name === "Mont Blanc Cold Brew")!,
   MENU_ITEMS.find((item) => item.name === "Spanish Latte")!,
-  MENU_ITEMS.find((item) => item.name === "Café Latte")!,
+  MENU_ITEMS.find((item) => item.name === "Nutella Iced Latte")!,
   MENU_ITEMS.find((item) => item.name === "Pistachio Iced Latte")!,
   MENU_ITEMS.find((item) => item.name === "Dark Mocha Frappe")!,
 ].filter(Boolean);
+

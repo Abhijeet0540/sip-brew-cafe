@@ -4,81 +4,80 @@
 
 @layer base {
   :root {
-    --bg-cream: #F4EFE5;
-    --warm-ivory: #FAF7F0;
-    --espresso: #251811;
-    --coffee-brown: #68442F;
-    --caramel: #B88A5A;
-    --muted-text: #80776C;
-    --white: #FFFFFF;
+    --bg-cream-light: #FBF8F3;
+    --bg-cream-sand: #F4EFE6;
+    --bg-cream-linen: #EDE6DB;
+    --text-espresso: #1E1714;
+    --text-espresso-muted: #685952;
+    --color-caramel: #C58A4B;
+    --color-cinnamon: #8C5832;
+    --color-olive: #4E5D46;
+    --color-forest: #354130;
+    --border-hairline: rgba(30, 23, 20, 0.08);
   }
 
   html {
-    background-color: var(--bg-cream);
-    color: var(--espresso);
+    background-color: var(--bg-cream-light);
+    color: var(--text-espresso);
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    scroll-behavior: smooth;
   }
 
   body {
-    background-color: var(--bg-cream);
-    color: var(--espresso);
+    background-color: var(--bg-cream-light);
+    color: var(--text-espresso);
     min-height: 100vh;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background-color: rgba(184, 138, 90, 0.25);
-    color: #251811;
+    background-color: rgba(197, 138, 75, 0.25);
+    color: #1E1714;
   }
 
-  /* Custom subtle scrollbar */
+  /* Refined minimal scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #FAF7F0;
+    background: #FBF8F3;
   }
   ::-webkit-scrollbar-thumb {
-    background: #DFCAAC;
+    background: #EDE6DB;
     border-radius: 9999px;
-    border: 2px solid #FAF7F0;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #B88A5A;
+    background: #C58A4B;
   }
 }
 
 @layer utilities {
-  .font-editorial {
-    font-family: 'Playfair Display', Georgia, serif;
-  }
-
-  .font-lobster {
-    font-family: 'Lobster', cursive;
+  .font-editorial,
+  .font-serif {
+    font-family: 'Instrument Serif', Georgia, serif;
   }
 
   .text-balance {
     text-wrap: balance;
   }
 
-  .grain-overlay {
-    background-image: radial-gradient(rgba(37, 24, 17, 0.04) 1px, transparent 0);
-    background-size: 24px 24px;
+  .border-hairline {
+    border-color: rgba(30, 23, 20, 0.08);
   }
 
-  .botanical-pattern {
-    background-color: #FAF7F0;
-    background-image: radial-gradient(#68442F 0.5px, transparent 0.5px), radial-gradient(#68442F 0.5px, #FAF7F0 0.5px);
-    background-size: 20px 20px;
-    background-position: 0 0, 10px 10px;
+  .divide-hairline > * + * {
+    border-color: rgba(30, 23, 20, 0.08);
   }
 
-  .d-none,
-  .d-non {
-    display: none !important;
+  /* Subtle editorial paper grain */
+  .grain-subtle {
+    background-image: radial-gradient(rgba(30, 23, 20, 0.035) 1px, transparent 0);
+    background-size: 28px 28px;
   }
 
-  /* Completely hide scrollbars while allowing touch/mouse drag scrolling */
+  /* Hide scrollbars cleanly */
   .scrollbar-none::-webkit-scrollbar,
   .no-scrollbar::-webkit-scrollbar {
     display: none !important;
@@ -89,48 +88,8 @@
 
   .scrollbar-none,
   .no-scrollbar {
-    -ms-overflow-style: none !important; /* IE and Edge */
-    scrollbar-width: none !important; /* Firefox */
-  }
-
-  /* Organic 3D floating keyframes for background coffee beans */
-  .animate-float-slow {
-    animation: float-slow 7.5s ease-in-out infinite;
-  }
-
-  .animate-float-reverse {
-    animation: float-reverse 9s ease-in-out infinite;
-  }
-
-  .animate-drift-slow {
-    animation: drift-slow 11s ease-in-out infinite;
-  }
-}
-
-@keyframes float-slow {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-15px) rotate(3deg);
-  }
-}
-
-@keyframes float-reverse {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(14px) rotate(-3.5deg);
-  }
-}
-
-@keyframes drift-slow {
-  0%, 100% {
-    transform: translate(0px, 0px) rotate(0deg);
-  }
-  50% {
-    transform: translate(8px, -12px) rotate(2deg);
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
   }
 }
 

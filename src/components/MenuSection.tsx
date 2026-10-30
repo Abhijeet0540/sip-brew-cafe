@@ -1,21 +1,45 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { MENU_CATEGORIES, MENU_ITEMS, MenuItem } from "@/data/menu";
-import { SITE_CONFIG } from "@/data/site";
 import { MenuCategory } from "./MenuCategory";
-import { Search, X, Coffee, Mail, Instagram, Copy, Check } from "lucide-react";
+import { Search, X, ArrowUpRight, MessageSquare } from "lucide-react";
+import { getWhatsAppOrderLink } from "@/data/site";
 
-interface MenuSectionProps {
-  selectedItemModal: MenuItem | null;
-  onSelectItem: (item: MenuItem | null) => void;
-}
-
-export const MenuSection: React.FC<MenuSectionProps> = ({
-  selectedItemModal,
-  onSelectItem,
-}) => {
+export const MenuSection: React.FC = () => {
   const [activeCategorySlug, setActiveCategorySlug] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [copied, setCopied] = useState(false);
+  const [selectedDrink, setSelectedDrink] = useState<MenuItem | null>(null);
+
+  // Close modal on Escape key and lock body scroll
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedDrink(null);
+      }
+    };
+
+    if (selectedDrink) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedDrink]);
+
+  const categoriesWithCounts = useMemo(() => {
+    return [
+      { slug: "all", name: "All Drinks", count: MENU_ITEMS.length },
+      ...MENU_CATEGORIES.map((cat) => ({
+        slug: cat.slug,
+        name: cat.name,
+        count: MENU_ITEMS.filter((item) => item.category === cat.slug).length,
+      })),
+    ];
+  }, []);
 
   // Filter items by category & search
   const filteredCategories = useMemo(() => {
@@ -44,7 +68,6 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
     });
   }, [activeCategorySlug, searchQuery]);
 
-  // Handle Tab Click with smooth scrolling directly to that section
   const handleCategoryTabClick = (slug: string) => {
     setActiveCategorySlug(slug);
 
@@ -63,226 +86,211 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
     }
   };
 
-  const handleEmailInquiry = (item: MenuItem) => {
-    const subject = encodeURIComponent(`Order Inquiry: ${item.name} (Sip & Brew)`);
-    const body = encodeURIComponent(
-      `Hi Sip & Brew Team,\n\nI would like to inquire about ordering ${item.name} (₹${item.price}).\n\nPlease let me know if it's currently available!\n\nThank you!`
-    );
-    window.location.href = `mailto:${SITE_CONFIG.contact.email}?subject=${subject}&body=${body}`;
-  };
-
-  const handleCopyOrder = (item: MenuItem) => {
-    navigator.clipboard.writeText(
-      `Sip & Brew Order Inquiry: ${item.name} - ₹${item.price}`
-    );
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
+  const totalResultsCount = filteredCategories.reduce(
+    (acc, curr) => acc + curr.items.length,
+    0
+  );
 
   return (
     <section
       id="menu"
-      className="py-20 sm:py-36 bg-[#F4EFE5] text-[#251811] relative overflow-hidden"
+      className="py-24 sm:py-32 lg:py-40 bg-[#F4EFE6] text-[#1E1714] border-b border-[#1E1714]/08"
     >
-      {/* Floating Coffee Beans Background Showcase */}
-      <div className="absolute top-12 right-2 sm:right-12 w-28 sm:w-44 md:w-56 opacity-30 pointer-events-none select-none z-0 animate-float-slow mix-blend-multiply filter drop-shadow-md">
-        <img
-          src="/images/coffee-ai-generated.png"
-          alt=""
-          aria-hidden="true"
-          className="w-full h-auto object-contain transform rotate-6"
-        />
-      </div>
-      <div className="absolute top-1/3 -left-6 sm:left-4 w-28 sm:w-44 md:w-56 opacity-25 pointer-events-none select-none z-0 animate-drift-slow mix-blend-multiply filter drop-shadow-md">
-        <img
-          src="/images/roasted-coffee-beans-falling-aromatic-rich.png"
-          alt=""
-          aria-hidden="true"
-          className="w-full h-auto object-contain transform -rotate-12"
-        />
-      </div>
-      <div className="absolute bottom-24 right-4 sm:right-16 w-28 sm:w-44 md:w-52 opacity-30 pointer-events-none select-none z-0 animate-float-reverse mix-blend-multiply filter drop-shadow-md">
-        <img
-          src="/images/coffee-bean-white-background.png"
-          alt=""
-          aria-hidden="true"
-          className="w-full h-auto object-contain transform rotate-12"
-        />
-      </div>
-
-      {/* Panoramic Coffee Beans Border Edge along Menu bottom */}
-      <div className="absolute -bottom-8 left-0 right-0 w-full h-20 sm:h-28 opacity-20 pointer-events-none select-none z-0 overflow-hidden mix-blend-multiply">
-        <img
-          src="/images/coffee-beans-pattern-design.png"
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-cover object-bottom"
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-coffee-600 mb-3">
-            <Coffee className="w-3.5 h-3.5 text-caramel-500" />
-            <span>Crafted With Care</span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Editorial Header */}
+        <div className="max-w-3xl mb-12 sm:mb-16">
+          <div className="flex items-center gap-2 text-xs font-sans font-semibold uppercase tracking-[0.25em] text-[#8C5832] mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C58A4B]" />
+            <span>The Directory</span>
           </div>
-          <h2 className="font-editorial text-3xl sm:text-5xl md:text-6xl font-medium text-[#251811] tracking-tight leading-[1.12]">
-            The Complete Beverage Menu
+          <h2 className="font-editorial text-4xl sm:text-6xl lg:text-7xl font-normal text-[#1E1714] tracking-tight leading-[1.08]">
+            Complete Beverage Menu
           </h2>
-          <p className="mt-4 text-sm sm:text-lg font-sans text-[#80776C] leading-relaxed">
-            Every cup prepared with calibrated precision. All prices in Indian Rupees (₹), inclusive of taxes. Tap any category to jump instantly.
+          <p className="mt-4 text-base sm:text-lg font-sans text-[#685952] leading-relaxed">
+            All 35 drinks prepared with artisanal precision. Tap any card to view detailed notes, flavor options, and order on WhatsApp.
           </p>
         </div>
 
-        {/* Sticky Filter & Search Bar */}
-        <div className="sticky top-16 sm:top-20 z-30 mb-8 sm:mb-12 bg-[#F4EFE5]/95 backdrop-blur-md py-3 sm:py-4 px-2 -mx-2 rounded-2xl border-y border-[#251811]/10 flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4 shadow-warm-sm">
-          {/* Category Tabs with direct scroll on tap */}
-          <div
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-            className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none no-scrollbar"
-          >
-            <button
-              onClick={() => handleCategoryTabClick("all")}
-              className={`px-4 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-caramel-500 ${
-                activeCategorySlug === "all"
-                  ? "bg-[#251811] text-[#FAF7F0] shadow-warm-md scale-[1.02]"
-                  : "bg-[#FAF7F0] text-[#251811]/80 hover:text-[#251811] hover:bg-[#FAF7F0] hover:border-caramel-400 border border-[#251811]/10 shadow-xs"
-              }`}
-            >
-              All Drinks ({MENU_ITEMS.length})
-            </button>
+        {/* Sticky Filter Bar & Real-Time Search */}
+        <div className="sticky top-16 sm:top-20 z-30 bg-[#F4EFE6]/95 backdrop-blur-md py-4 mb-8 border-y border-[#1E1714]/10">
+          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+            {/* Category Filter Tabs */}
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 md:pb-0 scroll-smooth">
+              {categoriesWithCounts.map((cat) => {
+                const isActive = activeCategorySlug === cat.slug;
+                return (
+                  <button
+                    key={cat.slug}
+                    onClick={() => handleCategoryTabClick(cat.slug)}
+                    className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-sans font-medium uppercase tracking-wider transition-all duration-200 flex items-center gap-1.5 flex-shrink-0 ${
+                      isActive
+                        ? "bg-[#1E1714] text-[#FBF8F3] shadow-xs"
+                        : "bg-[#EDE6DB]/60 text-[#685952] hover:text-[#1E1714] hover:bg-[#EDE6DB]"
+                    }`}
+                  >
+                    <span>{cat.name}</span>
+                    <span
+                      className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                        isActive
+                          ? "bg-[#C58A4B] text-[#1E1714]"
+                          : "bg-[#1E1714]/08 text-[#685952]"
+                      }`}
+                    >
+                      {cat.count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
 
-            {MENU_CATEGORIES.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => handleCategoryTabClick(cat.slug)}
-                className={`px-4 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-caramel-500 ${
-                  activeCategorySlug === cat.slug
-                    ? "bg-[#251811] text-[#FAF7F0] shadow-warm-md scale-[1.02]"
-                    : "bg-[#FAF7F0] text-[#251811]/80 hover:text-[#251811] hover:bg-[#FAF7F0] hover:border-caramel-400 border border-[#251811]/10 shadow-xs"
-                }`}
-              >
-                {cat.name}
-              </button>
-            ))}
-          </div>
-
-          {/* Search Input */}
-          <div className="relative w-full md:w-72 flex-shrink-0">
-            <Search className="w-4 h-4 text-[#80776C] absolute left-3.5 top-1/2 transform -translate-y-1/2" />
-            <input
-              type="text"
-              placeholder="Search coffee or flavor..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-full bg-[#FAF7F0] border border-[#251811]/15 text-sm text-[#251811] placeholder-[#80776C]/70 focus:outline-none focus:ring-2 focus:ring-caramel-500 focus:border-transparent transition-all shadow-xs"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3.5 top-1/2 transform -translate-y-1/2 text-[#80776C] hover:text-[#251811]"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            )}
+            {/* Instant Search Bar */}
+            <div className="relative w-full md:w-72 flex-shrink-0">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search drinks, flavors..."
+                aria-label="Search beverage menu"
+                className="w-full bg-[#FBF8F3] border border-[#1E1714]/15 rounded-full pl-9 pr-8 py-2 text-xs font-sans text-[#1E1714] placeholder-[#685952]/60 focus:outline-none focus:border-[#C58A4B] transition-colors"
+              />
+              <Search className="w-3.5 h-3.5 text-[#685952] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#685952] hover:text-[#1E1714]"
+                  aria-label="Clear search"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Categories Container */}
+        {/* Categories & Cards */}
         {filteredCategories.length > 0 ? (
-          <div className="space-y-10">
+          <div className="space-y-6">
             {filteredCategories.map(({ category, items }) => (
               <MenuCategory
                 key={category.id}
                 category={category}
                 items={items}
-                onSelectItem={onSelectItem}
+                onSelectItem={(item) => setSelectedDrink(item)}
               />
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 bg-[#FAF7F0] rounded-3xl border border-[#251811]/10 shadow-warm-sm">
-            <Coffee className="w-10 h-10 text-caramel-500 mx-auto mb-3" />
-            <h3 className="font-editorial text-2xl text-[#251811]">No drinks matched "{searchQuery}"</h3>
-            <p className="text-sm text-[#80776C] mt-1">Try another search term or reset the menu.</p>
+          <div className="py-20 text-center border-t border-[#1E1714]/10">
+            <h3 className="font-editorial text-3xl text-[#1E1714] mb-2">
+              No drinks matched "{searchQuery}"
+            </h3>
+            <p className="text-sm text-[#685952] font-sans mb-6">
+              Try searching by name, flavor note, or clear your query to view the full directory.
+            </p>
             <button
               onClick={() => {
                 setSearchQuery("");
                 setActiveCategorySlug("all");
               }}
-              className="mt-4 px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#251811] text-[#FAF7F0] hover:bg-coffee-600 transition-colors shadow-warm-sm"
+              className="px-6 py-2.5 rounded-full text-xs font-sans font-semibold uppercase tracking-wider bg-[#1E1714] text-[#FBF8F3] hover:bg-[#8C5832] transition-colors"
             >
-              Reset Filters
+              Reset Search &amp; Filter
             </button>
           </div>
         )}
+
+        {/* Ledger Bottom Summary Bar */}
+        <div className="mt-16 pt-8 border-t border-[#1E1714]/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans text-[#685952]">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#4E5D46]" />
+            <span>Showing {totalResultsCount} items · Prices in Indian Rupees (₹)</span>
+          </div>
+
+          <div>
+            <a
+              href={getWhatsAppOrderLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-semibold text-[#1E1714] hover:text-[#8C5832] transition-colors"
+            >
+              <span>Custom order or takeaway inquiry? Chat on WhatsApp</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#C58A4B]" />
+            </a>
+          </div>
+        </div>
       </div>
 
-      {/* Drink Detail Modal */}
-      {selectedItemModal && (
+      {/* ============================================================== */}
+      {/* EDITORIAL DRINK DETAIL POPUP MODAL                             */}
+      {/* ============================================================== */}
+      {selectedDrink && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#251811]/70 backdrop-blur-sm transition-all"
+          onClick={() => setSelectedDrink(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#1E1714]/75 backdrop-blur-xs transition-all animate-in fade-in duration-200"
         >
-          <div className="relative w-full max-w-lg bg-[#FAF7F0] rounded-3xl shadow-warm-xl border border-[#251811]/15 overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-300">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-lg bg-[#FBF8F3] rounded-3xl shadow-[0_24px_60px_rgba(30,23,20,0.2)] border border-[#1E1714]/15 overflow-hidden flex flex-col max-h-[90vh]"
+          >
             {/* Modal Close Button */}
             <button
-              onClick={() => onSelectItem(null)}
-              aria-label="Close details"
-              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-[#FAF7F0]/90 backdrop-blur-md border border-[#251811]/10 flex items-center justify-center text-[#251811] hover:bg-[#251811] hover:text-[#FAF7F0] transition-colors shadow-sm"
+              onClick={() => setSelectedDrink(null)}
+              aria-label="Close details popup"
+              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-[#FBF8F3]/90 border border-[#1E1714]/10 flex items-center justify-center text-[#1E1714] hover:bg-[#1E1714] hover:text-[#FBF8F3] transition-colors shadow-xs"
             >
-              <X className="w-4 h-4 stroke-[2]" />
+              <X className="w-4 h-4 stroke-[1.75]" />
             </button>
 
-            {/* Drink Image */}
-            <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#EBDDC9]">
+            {/* Drink Image Frame */}
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#EDE6DB] flex-shrink-0">
               <img
-                src={selectedItemModal.image}
-                alt={selectedItemModal.name}
-                className="w-full h-full object-cover"
+                src={selectedDrink.image}
+                alt={selectedDrink.name}
+                className="w-full h-full object-cover object-center"
               />
-              <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#251811]/85 backdrop-blur-md text-[#FAF7F0] text-[10px] font-semibold uppercase tracking-wider">
-                {selectedItemModal.category.replace("-", " ")}
+              <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#1E1714]/90 text-[#FBF8F3] text-[10px] font-sans font-semibold uppercase tracking-wider">
+                {selectedDrink.category.replace("-", " ")}
               </div>
             </div>
 
-            <div className="p-6 sm:p-8 flex flex-col space-y-4">
+            {/* Drink Details Content */}
+            <div className="p-6 sm:p-8 flex flex-col overflow-y-auto space-y-5">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <span className="text-[11px] font-semibold uppercase tracking-widest text-coffee-600 block mb-1">
-                    Authentic Recipe
+                  <span className="text-[10px] font-sans font-semibold uppercase tracking-widest text-[#8C5832] block mb-1">
+                    Specialty Preparation
                   </span>
-                  <h3 className="font-editorial text-3xl text-[#251811]">
-                    {selectedItemModal.name}
+                  <h3 className="font-editorial text-3xl sm:text-4xl text-[#1E1714] leading-tight">
+                    {selectedDrink.name}
                   </h3>
                 </div>
-                <div className="text-right">
-                  <span className="font-sans font-bold text-2xl text-[#251811]">
-                    ₹{selectedItemModal.price}
+                <div className="text-right flex-shrink-0">
+                  <span className="font-sans font-semibold text-2xl sm:text-3xl text-[#1E1714] block">
+                    ₹{selectedDrink.price}
                   </span>
-                  <span className="block text-[10px] text-[#80776C] uppercase tracking-wider">
-                    Inc. all taxes
+                  <span className="block text-[10px] text-[#685952] uppercase tracking-wider mt-0.5">
+                    Incl. all taxes
                   </span>
                 </div>
               </div>
 
-              <p className="text-sm font-sans text-[#80776C] leading-relaxed">
-                {selectedItemModal.description}
+              <p className="text-sm font-sans text-[#685952] leading-relaxed">
+                {selectedDrink.description}
               </p>
 
-              {/* Flavors if applicable */}
-              {selectedItemModal.flavors && selectedItemModal.flavors.length > 0 && (
-                <div className="pt-2 border-t border-[#251811]/10">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-coffee-700 block mb-2">
-                    Available Flavor Profiles:
+              {/* Flavors where available */}
+              {selectedDrink.flavors && selectedDrink.flavors.length > 0 && (
+                <div className="pt-3 border-t border-[#1E1714]/10">
+                  <span className="text-xs font-sans font-semibold uppercase tracking-wider text-[#8C5832] block mb-2">
+                    Available Flavor Notes:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
-                    {selectedItemModal.flavors.map((flv) => (
+                    {selectedDrink.flavors.map((flv) => (
                       <span
                         key={flv}
-                        className="text-xs px-2.5 py-1 rounded-md bg-[#F4EFE5] border border-[#251811]/10 text-[#251811] font-medium"
+                        className="text-xs px-3 py-1 rounded-full bg-[#EDE6DB]/70 border border-[#1E1714]/10 text-[#1E1714] font-medium"
                       >
                         {flv}
                       </span>
@@ -291,59 +299,31 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                 </div>
               )}
 
-              {selectedItemModal.notes && (
-                <p className="text-xs text-coffee-600 italic">
-                  * {selectedItemModal.notes}
+              {selectedDrink.notes && (
+                <p className="text-xs text-[#8C5832] italic font-sans">
+                  * {selectedDrink.notes}
                 </p>
               )}
 
-              {/* Action Buttons */}
-              <div className="pt-4 border-t border-[#251811]/10 flex flex-col gap-2.5">
-                <div className="flex flex-col sm:flex-row gap-2.5">
-                  <button
-                    onClick={() => handleEmailInquiry(selectedItemModal)}
-                    className="flex-1 py-3 px-5 rounded-full bg-[#251811] text-[#FAF7F0] hover:bg-coffee-600 transition-all duration-300 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 shadow-warm-md hover:-translate-y-0.5"
-                  >
-                    <Mail className="w-4 h-4 text-caramel-400" />
-                    <span>Inquire via Email</span>
-                  </button>
+              {/* Action Buttons: Primary WhatsApp Order & Close */}
+              <div className="pt-4 border-t border-[#1E1714]/10 flex flex-col sm:flex-row gap-3">
+                <a
+                  href={getWhatsAppOrderLink(selectedDrink.name, selectedDrink.price)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-3.5 px-6 rounded-full bg-[#1E1714] text-[#FBF8F3] hover:bg-[#8C5832] transition-colors text-xs font-sans font-semibold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm"
+                >
+                  <MessageSquare className="w-4 h-4 text-[#C58A4B]" />
+                  <span>Order on WhatsApp (₹{selectedDrink.price})</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
 
-                  <a
-                    href={SITE_CONFIG.contact.instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 py-3 px-5 rounded-full bg-[#FAF7F0] border border-caramel-500/40 text-[#251811] hover:bg-caramel-500 hover:text-[#251811] transition-all duration-300 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 shadow-warm-sm hover:-translate-y-0.5 text-center"
-                  >
-                    <Instagram className="w-4 h-4 text-caramel-600" />
-                    <span>DM on Instagram</span>
-                  </a>
-                </div>
-
-                <div className="flex items-center gap-2.5">
-                  <button
-                    onClick={() => handleCopyOrder(selectedItemModal)}
-                    className="flex-1 py-2.5 px-4 rounded-full bg-[#F4EFE5] border border-[#251811]/15 text-[#251811] hover:bg-[#EBDDC9] transition-all text-xs font-medium flex items-center justify-center gap-1.5"
-                  >
-                    {copied ? (
-                      <>
-                        <Check className="w-3.5 h-3.5 text-green-700" />
-                        <span className="text-green-800 font-semibold">Order Details Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5 text-[#80776C]" />
-                        <span>Copy Order Details</span>
-                      </>
-                    )}
-                  </button>
-
-                  <button
-                    onClick={() => onSelectItem(null)}
-                    className="py-2.5 px-5 rounded-full bg-transparent border border-[#251811]/20 text-[#80776C] hover:text-[#251811] transition-all text-xs font-semibold uppercase tracking-wider"
-                  >
-                    Close
-                  </button>
-                </div>
+                <button
+                  onClick={() => setSelectedDrink(null)}
+                  className="py-3 px-5 rounded-full border border-[#1E1714]/20 text-[#685952] hover:text-[#1E1714] hover:border-[#1E1714] transition-colors text-xs font-sans font-semibold uppercase tracking-wider"
+                >
+                  Close
+                </button>
               </div>
             </div>
           </div>

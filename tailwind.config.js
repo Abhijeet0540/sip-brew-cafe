@@ -8,40 +8,45 @@ export default {
     extend: {
       colors: {
         cream: {
-          50: '#FAF7F0',  // Warm ivory
-          100: '#F4EFE5', // Background cream
-          200: '#EBDDC9',
-          300: '#DFCAAC',
+          light: '#FBF8F3', // Primary background
+          sand: '#F4EFE6',  // Secondary tinted panels
+          linen: '#EDE6DB', // Tertiary accents / borders
+          50: '#FBF8F3',
+          100: '#F4EFE6',
+          200: '#EDE6DB',
+          DEFAULT: '#FBF8F3',
         },
         espresso: {
-          900: '#150D0A',
-          800: '#251811', // Primary espresso
-          700: '#3D281D',
-          DEFAULT: '#251811',
-        },
-        coffee: {
-          700: '#4A3022',
-          600: '#68442F', // Coffee brown
-          500: '#8A5D40',
-          DEFAULT: '#68442F',
+          DEFAULT: '#1E1714',
+          muted: '#685952',
+          light: '#352B26',
+          900: '#150F0D',
         },
         caramel: {
-          600: '#9E7145',
-          500: '#B88A5A', // Caramel accent
-          400: '#CFA272',
-          DEFAULT: '#B88A5A',
+          DEFAULT: '#C58A4B',
+          dark: '#B07436',
+          light: '#D9A167',
+          500: '#C58A4B',
+          400: '#D9A167',
+          600: '#B07436',
         },
-        muted: {
-          DEFAULT: '#80776C',
-          light: '#A69E93',
-          dark: '#5C544A',
+        cinnamon: {
+          DEFAULT: '#8C5832',
+          dark: '#734423',
         },
+        olive: {
+          DEFAULT: '#4E5D46',
+          dark: '#354130',
+        },
+        forest: {
+          DEFAULT: '#354130',
+        },
+        hairline: 'rgba(30, 23, 20, 0.08)',
       },
       fontFamily: {
-        lobster: ['"Lobster"', 'cursive'],
-        display: ['"Playfair Display"', 'Georgia', 'serif'],
-        serif: ['"Playfair Display"', 'Georgia', 'serif'],
-        editorial: ['"Playfair Display"', 'Georgia', 'serif'],
+        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+        display: ['"Instrument Serif"', 'Georgia', 'serif'],
+        editorial: ['"Instrument Serif"', 'Georgia', 'serif'],
         sans: ['"DM Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       borderRadius: {
